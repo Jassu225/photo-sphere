@@ -67,30 +67,28 @@ export default function PhotoSphere() {
 
       {/* Sphere Canvas */}
       <main className="py-16 w-full h-full">
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="w-full h-full max-w-2xl aspect-square mx-auto">
-            <Canvas camera={{ fov: 75, position: [0, 0, 12] }} className="w-full h-full">
-              <ambientLight intensity={1.5} />
-              <pointLight position={[10, 10, 10]} />
-              {photos.length > 0 ? (
-                <>
-                  <PhotoSphereGroup />
-                  <OrbitControls 
-                    ref={controlsRef} 
-                    enablePan={false} 
-                    minDistance={MIN_DISTANCE} 
-                    maxDistance={MAX_DISTANCE} 
-                    onChange={handleControlsChange}
-                    zoomSpeed={0.5}
-                  />
-                </>
-              ) : (
-                <Text position={[0, 0, 0]} fontSize={0.3} color="black" anchorX="center" anchorY="middle">
-                  Select photos to render the sphere
-                </Text>
-              )}
-            </Canvas>
-          </div>
+        <div className="w-full h-full">
+          <Canvas camera={{ fov: 75, position: [0, 0, 12] }} className="w-full h-full">
+            <ambientLight intensity={1.5} />
+            <pointLight position={[10, 10, 10]} />
+            {photos.length > 0 ? (
+              <>
+                <PhotoSphereGroup />
+                <OrbitControls 
+                  ref={controlsRef} 
+                  enablePan={false} 
+                  minDistance={MIN_DISTANCE} 
+                  maxDistance={MAX_DISTANCE} 
+                  onChange={handleControlsChange}
+                  zoomSpeed={0.5}
+                />
+              </>
+            ) : (
+              <Text position={[0, 0, 0]} fontSize={0.3} color="black" anchorX="center" anchorY="middle">
+                Select photos to render the sphere
+              </Text>
+            )}
+          </Canvas>
         </div>
       </main>
 

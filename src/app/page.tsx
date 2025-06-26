@@ -49,18 +49,18 @@ export default function Home() {
         </div>
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-center mb-8 text-dark-on-surface">Why You'll Love It</h2>
-          <div className="space-y-10">
-            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+          <div className="flex flex-col space-y-10 md:flex-row md:space-y-0 md:space-x-8">
+            <div className="flex-1 flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
               <span className="material-icons text-4xl text-dark-secondary mb-4">3d_rotation</span>
               <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Interactive 3D</h3>
               <p className="text-dark-on-surface/70">Pan, zoom, and rotate your photo sphere with intuitive controls.</p>
             </div>
-            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+            <div className="flex-1 flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
               <span className="material-icons text-4xl text-dark-secondary mb-4">lock</span>
               <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Local & Private</h3>
               <p className="text-dark-on-surface/70">Your photos are processed on your device and are never uploaded.</p>
             </div>
-            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+            <div className="flex-1 flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
               <span className="material-icons text-4xl text-dark-secondary mb-4">devices</span>
               <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Fully Responsive</h3>
               <p className="text-dark-on-surface/70">Enjoy the same beautiful experience on any screen size.</p>
@@ -73,7 +73,7 @@ export default function Home() {
           <div className="w-8 h-8 bg-dark-primary rounded-full flex items-center justify-center text-dark-bg font-semibold text-sm">N</div>
           <span>Created with</span>
           <span className="material-icons text-red-500 text-xl">favorite</span>
-          <span>by Gemini</span>
+          <span>by Gemini & Claude</span>
         </div>
       </footer>
     </div>
