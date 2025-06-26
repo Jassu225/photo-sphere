@@ -52,7 +52,7 @@ export default function PhotoSphere() {
   };
 
   return (
-    <div className="relative w-full h-full min-h-screen bg-black flex flex-col">
+    <div className="relative w-full h-full bg-black">
       {/* App Bar */}
       <header className="fixed top-0 left-0 w-full z-30 bg-[#1E1E1E] flex items-center h-16 px-4 shadow-md">
         <button
@@ -66,9 +66,9 @@ export default function PhotoSphere() {
       </header>
 
       {/* Sphere Canvas */}
-      <main className="flex-1 flex items-center justify-center pt-16 pb-28 sm:pb-32">
+      <main className="py-16 w-full h-full">
         <div className="w-full h-full flex items-center justify-center">
-          <div className="w-full h-full max-w-2xl max-h-[80vh] aspect-square mx-auto">
+          <div className="w-full h-full max-w-2xl aspect-square mx-auto">
             <Canvas camera={{ fov: 75, position: [0, 0, 12] }} className="w-full h-full">
               <ambientLight intensity={1.5} />
               <pointLight position={[10, 10, 10]} />
