@@ -8,7 +8,7 @@ import { PhotoSphereGroup } from "./PhotoSphereGroup";
 import { ZoomSlider } from "./ZoomSlider";
 import { Vector3 } from "three";
 
-const MIN_DISTANCE = 8;
+const MIN_DISTANCE = 4;
 const MAX_DISTANCE = 20;
 
 export default function PhotoSphere() {
@@ -52,43 +52,60 @@ export default function PhotoSphere() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black" style={{display: "grid", gridTemplateRows: "max-content 1fr max-content", gridTemplateColumns: "1fr"}}>
-      <button
-        onClick={handleBack}
-        className="z-10 px-4 py-2 bg-white/20 text-white rounded-lg backdrop-blur-sm hover:bg-white/30 transition-colors"
-      >
-        &larr; Back
-      </button>
-      <Canvas camera={{ fov: 75, position: [0, 0, 12] }}>
-        <ambientLight intensity={1.5} />
-        <pointLight position={[10, 10, 10]} />
-        {photos.length > 0 ? (
-          <>
-            <PhotoSphereGroup />
-            <OrbitControls 
-              ref={controlsRef} 
-              enablePan={false} 
-              minDistance={MIN_DISTANCE} 
-              maxDistance={MAX_DISTANCE} 
-              onChange={handleControlsChange}
-              zoomSpeed={0.5}
-            />
-          </>
-        ) : (
-          <Text position={[0, 0, 0]} fontSize={0.3} color="black" anchorX="center" anchorY="middle">
-            Select photos to render the sphere
-          </Text>
-        )}
-      </Canvas>
-      <ZoomSlider 
-        min={MIN_DISTANCE} 
-        max={MAX_DISTANCE} 
-        step={0.1} 
-        value={zoom} 
-        onChange={handleZoomChange} 
-        onPointerDown={handleSliderPointerDown}
-        onPointerUp={handleSliderPointerUp}
-      />
+    <div className="relative w-full h-full min-h-screen bg-black flex flex-col">
+      {/* App Bar */}
+      <header className="fixed top-0 left-0 w-full z-30 bg-[#1E1E1E] flex items-center h-16 px-4 shadow-md">
+        <button
+          onClick={handleBack}
+          className="flex items-center text-white text-2xl mr-2 focus:outline-none"
+          aria-label="Back"
+        >
+          <span className="material-icons text-3xl">arrow_back</span>
+        </button>
+        <h1 className="text-white text-xl font-bold ml-1">Memories</h1>
+      </header>
+
+      {/* Sphere Canvas */}
+      <main className="flex-1 flex items-center justify-center pt-16 pb-28 sm:pb-32">
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full max-w-2xl max-h-[80vh] aspect-square mx-auto">
+            <Canvas camera={{ fov: 75, position: [0, 0, 12] }} className="w-full h-full">
+              <ambientLight intensity={1.5} />
+              <pointLight position={[10, 10, 10]} />
+              {photos.length > 0 ? (
+                <>
+                  <PhotoSphereGroup />
+                  <OrbitControls 
+                    ref={controlsRef} 
+                    enablePan={false} 
+                    minDistance={MIN_DISTANCE} 
+                    maxDistance={MAX_DISTANCE} 
+                    onChange={handleControlsChange}
+                    zoomSpeed={0.5}
+                  />
+                </>
+              ) : (
+                <Text position={[0, 0, 0]} fontSize={0.3} color="black" anchorX="center" anchorY="middle">
+                  Select photos to render the sphere
+                </Text>
+              )}
+            </Canvas>
+          </div>
+        </div>
+      </main>
+
+      {/* Bottom Bar */}
+      <footer className="fixed bottom-0 left-0 w-full z-30 bg-[#232323] rounded-t-2xl shadow-2xl px-6 py-4 flex items-center justify-center">
+        <ZoomSlider 
+          min={MIN_DISTANCE} 
+          max={MAX_DISTANCE} 
+          step={0.1} 
+          value={zoom} 
+          onChange={handleZoomChange} 
+          onPointerDown={handleSliderPointerDown}
+          onPointerUp={handleSliderPointerUp}
+        />
+      </footer>
     </div>
   );
 } 

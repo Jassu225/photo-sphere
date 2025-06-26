@@ -20,8 +20,8 @@ export function ZoomSlider({
   onPointerUp: (event: PointerEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <div className="z-20 flex items-center space-x-2 bg-white/20 p-5 rounded-lg backdrop-blur-sm ml-auto">
-      <span className="text-white text-xs font-mono">-</span>
+    <div className="flex items-center justify-between w-full max-w-md mx-auto space-x-4">
+      <span className="material-icons text-3xl text-[#BB86FC] select-none">zoom_out</span>
       <input
         type="range"
         min={min}
@@ -31,9 +31,10 @@ export function ZoomSlider({
         onChange={onChange}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
-        className="w-24 h-1 accent-blue-500 bg-transparent cursor-pointer"
+        className="w-full h-2 accent-[#BB86FC] bg-[#333] rounded-full outline-none focus:ring-2 focus:ring-[#BB86FC] transition-all slider-thumb-custom"
+        style={{ accentColor: '#BB86FC' }}
       />
-      <span className="text-white text-xs font-mono">+</span>
+      <span className="material-icons text-3xl text-[#BB86FC] select-none">zoom_in</span>
     </div>
   );
 } 
