@@ -1,8 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Setup
 
-First, run the development server:
+1. Create a Google Cloud project and enable the Google Photos Library API.
+2. Set up OAuth 2.0 credentials and get your Client ID.
+3. Create a `.env.local` file in the root of the project with:
+
+```
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id-here
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev

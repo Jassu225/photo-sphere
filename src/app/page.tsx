@@ -1,102 +1,80 @@
-import Image from "next/image";
+"use client";
+import { useRef } from "react";
+import { useStore } from "@/store";
+import PhotoSphere from "@/components/PhotoSphere";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { photos, setPhotos } = useStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const imageFiles = Array.from(e.target.files).filter(file => file.type.startsWith('image/'));
+      const newPhotoUrls = imageFiles.map(file => URL.createObjectURL(file));
+      setPhotos(newPhotoUrls);
+    }
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  if (photos.length > 0) {
+    return <PhotoSphere />;
+  }
+
+  return (
+    <div className="dark bg-dark-bg text-dark-on-surface min-h-screen flex flex-col">
+      <header className="py-8 px-6 text-center">
+        <h1 className="text-4xl font-bold text-dark-primary">Photo Sphere</h1>
+        <p className="mt-2 text-lg text-dark-on-surface/80">Turn your memories into a mesmerizing 3D globe, right in your browser.</p>
+      </header>
+      <main className="flex-grow px-6 py-8">
+        <div className="text-center mb-12">
+          <button
+            className="bg-dark-primary hover:bg-dark-primary/90 text-dark-bg font-medium py-3 px-6 rounded-lg inline-flex items-center shadow-md transition-colors"
+            onClick={handleButtonClick}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <span className="material-icons mr-2">collections</span>
+            Select Photos
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            onChange={handleFileChange}
+          />
         </div>
+        <section className="mb-12">
+          <h2 className="text-3xl font-semibold text-center mb-8 text-dark-on-surface">Why You'll Love It</h2>
+          <div className="space-y-10">
+            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+              <span className="material-icons text-4xl text-dark-secondary mb-4">3d_rotation</span>
+              <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Interactive 3D</h3>
+              <p className="text-dark-on-surface/70">Pan, zoom, and rotate your photo sphere with intuitive controls.</p>
+            </div>
+            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+              <span className="material-icons text-4xl text-dark-secondary mb-4">lock</span>
+              <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Local & Private</h3>
+              <p className="text-dark-on-surface/70">Your photos are processed on your device and are never uploaded.</p>
+            </div>
+            <div className="flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
+              <span className="material-icons text-4xl text-dark-secondary mb-4">devices</span>
+              <h3 className="text-xl font-medium mb-2 text-dark-on-surface">Fully Responsive</h3>
+              <p className="text-dark-on-surface/70">Enjoy the same beautiful experience on any screen size.</p>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="py-6 px-6 text-center border-t border-dark-surface/50">
+        <div className="flex items-center justify-center space-x-2 text-dark-on-surface/70">
+          <div className="w-8 h-8 bg-dark-primary rounded-full flex items-center justify-center text-dark-bg font-semibold text-sm">N</div>
+          <span>Created with</span>
+          <span className="material-icons text-red-500 text-xl">favorite</span>
+          <span>by Gemini</span>
+        </div>
       </footer>
     </div>
   );
