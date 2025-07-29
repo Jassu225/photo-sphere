@@ -1,9 +1,8 @@
 "use client";
-import { useRef, useState, ChangeEvent, PointerEvent } from "react";
+import { useRef, useState, ChangeEvent, ElementRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Text } from "@react-three/drei";
 import { useStore } from "@/store";
-import { CameraController } from "./CameraController";
 import { PhotoSphereGroup } from "./PhotoSphereGroup";
 import { ZoomSlider } from "./ZoomSlider";
 import { Vector3 } from "three";
@@ -14,7 +13,7 @@ const MAX_DISTANCE = 20;
 export default function PhotoSphere() {
   const { photos, setPhotos } = useStore();
   const [zoom, setZoom] = useState((MAX_DISTANCE + MIN_DISTANCE) - 12);
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<ElementRef<typeof OrbitControls>>(null);
   const isDraggingSlider = useRef(false);
 
   const handleBack = () => {
@@ -35,11 +34,11 @@ export default function PhotoSphere() {
     }
   };
 
-  const handleSliderPointerDown = (e: PointerEvent<HTMLInputElement>) => {
+  const handleSliderPointerDown = () => {
     isDraggingSlider.current = true;
   };
   
-  const handleSliderPointerUp = (e: PointerEvent<HTMLInputElement>) => {
+  const handleSliderPointerUp = () => {
     isDraggingSlider.current = false;
   };
 

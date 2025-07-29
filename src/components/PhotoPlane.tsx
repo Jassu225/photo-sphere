@@ -4,8 +4,6 @@ import { useMemo, useRef, useLayoutEffect, useEffect, useState } from "react";
 import * as THREE from "three";
 
 const SPHERE_RADIUS = 4;
-const PLANE_WIDTH = 1.2;
-const PLANE_HEIGHT = 1.2;
 const PLANE_SEGMENTS = 32;
 const BOUNDING_BOX = 1.2;
 

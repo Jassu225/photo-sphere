@@ -48,7 +48,7 @@ export default function Home() {
           />
         </div>
         <section className="mb-12">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-dark-on-surface">Why You'll Love It</h2>
+          <h2 className="text-3xl font-semibold text-center mb-8 text-dark-on-surface">Why You&apos;ll Love It</h2>
           <div className="flex flex-col space-y-10 md:flex-row md:space-y-0 md:space-x-8">
             <div className="flex-1 flex flex-col items-center text-center p-6 bg-dark-surface rounded-xl shadow-lg">
               <span className="material-icons text-4xl text-dark-secondary mb-4">3d_rotation</span>
