@@ -30,6 +30,8 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
+    "fire-memoize": "^0.3.0",
+    "firebase-admin": "^13.4.0",
     "typescript": "^5"
   }
 }
